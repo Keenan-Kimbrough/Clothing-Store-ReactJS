@@ -1,5 +1,15 @@
+
+
 import {initializeApp} from 'firebase/app'
-import {getAuth, signInWithRedirect, signInWithPopup,GoogleAuthProvider} from 'firebase/auth'
+import {getAuth, 
+    signInWithRedirect, 
+    signInWithPopup,
+    GoogleAuthProvider} 
+    from 'firebase/auth'
+    import {getFirestore, 
+        doc,
+        getDoc,
+        setDoc} from 'firebase/firestore'
 const firebaseConfig = {
     apiKey: "AIzaSyClOJ7FNeZY4uYzYFqkBBVBO0Yv5L0A8mA",
     authDomain: "clothing-website-db-ed0d8.firebaseapp.com",
@@ -19,3 +29,13 @@ const firebaseConfig = {
 
   export const auth = getAuth()
   export const signInGooglePopup = () => signInWithPopup(auth, provider)
+  export const db = getFirestore()
+
+  export const createUserDocumentFromAuth = async (userAuth) => {
+      const userDocRef = doc(db, 'users', userAuth.uid);
+
+      console.log(userDocRef);
+
+const userSnapshot = await getDoc(userDocRef);
+
+  }
